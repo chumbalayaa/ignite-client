@@ -1,33 +1,28 @@
 import React, {Component} from "react";
+import {Form, Button} from "react-bootstrap";
+import axios from 'axios';
 
 export default class Login extends Component {
   render() {
     return (
-      <form>
-        <h3>Sign In</h3>
-
-        <div className="form-group">
-            <label>Email address</label>
-            <input type="email" className="form-control" placeholder="Enter email" />
-        </div>
-
-        <div className="form-group">
-            <label>Password</label>
-            <input type="password" className="form-control" placeholder="Enter password" />
-        </div>
-
-        <div className="form-group">
-            <div className="custom-control custom-checkbox">
-                <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-            </div>
-        </div>
-
-        <button type="submit" className="btn btn-primary btn-block">Submit</button>
-        <p className="forgot-password text-right">
-            Forgot <a href="#">password?</a>
-        </p>
-    </form>
+      <Form>
+        <Form.Label>Log In</Form.Label>
+        <Form.Group controlId="basicEmailLogin">
+          <Form.Label>Email Address</Form.Label>
+          <Form.Control type="email" className="form-control" placeholder="Enter email"/>
+        </Form.Group>
+        <Form.Group controlId="basicPasswordLogin">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" className="form-control" placeholder="Enter password"/>
+        </Form.Group>
+        <Form.Group controlId="basicRememberMeCheck">
+          <Form.Check />
+          <Form.Label>Remember me</Form.Label>
+        </Form.Group>
+        <Button variant="primary" type="submit" onClick={this.handleSubmit}>
+          Log In
+        </Button>
+      </Form>
     )
   }
 }
