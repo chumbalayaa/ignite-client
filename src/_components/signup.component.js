@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Form, Button} from "react-bootstrap";
-import axios from 'axios';
+
+import {userService} from '../_services/user.service';
 
 export default class Signup extends Component {
   constructor(props) {
@@ -37,15 +38,7 @@ export default class Signup extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    axios.post('/api/users', newUser)
-      .then(res => {
-        if (res.data){
-          alert("Success");
-        } else{
-          console.log("ERROR");
-      }
-      })
-      .catch(err => console.log(err))
+    userService.createNewUser(newUser);
     e.preventDefault();
   }
 
