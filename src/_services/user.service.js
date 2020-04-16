@@ -19,3 +19,15 @@ function createNewUser(newUser) {
     })
     .catch(err => console.log(err))
 }
+
+function pullUser(email, password) {
+  axios.get('/api/user', email, password)
+    .then(res => {
+      if (res.data) {
+        console.log(res.data);
+      } else{
+        console.log("error");
+      }
+    })
+    .catch(err => console.log(err))
+}
