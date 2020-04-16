@@ -1,70 +1,67 @@
 import React, {Component} from "react";
-import {Form, Button} from "react-bootstrap";
+import {Form, Input, Button, Checkbox } from "antd";
 
 import {userService} from '../_services/user.service';
+
+const FormItem = Form.Item;
 
 export default class Signup extends Component {
   constructor(props) {
     super(props);
-    this.state = {firstName: '', lastName: '', email: '', password: ''};
-
-    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-    this.handleLastNameChange = this.handleLastNameChange.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleFirstNameChange(e) {
-    this.setState({firstName: e.target.value});
-  }
-
-  handleLastNameChange(e) {
-    this.setState({lastName: e.target.value});
-  }
-
-  handleEmailChange(e) {
-    this.setState({email: e.target.value});
-  }
-
-  handlePasswordChange(e) {
-    this.setState({password: e.target.value});
-  }
-
-  handleSubmit(e) {
+  onFinish(values) {
     const newUser = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      email: this.state.email,
-      password: this.state.password
+      firstName: values.formFirstName,
+      lastName: values.formLastName,
+      email: values.formEmail,
+      password: values.formPassword
     };
     userService.createNewUser(newUser);
-    e.preventDefault();
   }
 
   render() {
     return (
-      <Form>
-        <Form.Label>Sign Up</Form.Label>
-        <Form.Group controlId="formBasicFirstName">
-          <Form.Label>First name</Form.Label>
-          <Form.Control type="text" placeholder="First name" onChange={this.handleFirstNameChange} />
-        </Form.Group>
-        <Form.Group controlId="formBasicLastName">
-          <Form.Label>Last name</Form.Label>
-          <Form.Control type="text" placeholder="Last name" onChange={this.handleLastNameChange} />
-        </Form.Group>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Email address" onChange={this.handleEmailChange} />
-        </Form.Group>
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" onChange={this.handlePasswordChange} />
-        </Form.Group>
-        <Button variant="primary" type="submit" onClick={this.handleSubmit}>
-          Sign Up
-        </Button>
+      <Form onFinish={this.onFinish} className="signup-form">
+        <FormItem name="formFirstName" rules={[
+          {required: true, message: 'Please input your first name!'},]}>
+          <Input placeholder="First name" />
+        </FormItem>
+        <FormItem name="formLastName" rules={[
+          {required: true, message: 'Please input your last name!'},]}>
+          <Input placeholder="Last name" />
+        </FormItem>
+        <FormItem name="formEmail" rules={[{type: 'email', message: 'The input is not a value E-mail'},
+          {required: true, message: 'Please input your E-mail!'},]}>
+          <Input placeholder="Email address" />
+        </FormItem>
+        <FormItem name='formPassword' rules={[{ required: true, message:'please input your password!'}]} hasFeedback>
+          <Input.Password placeholder="Password"/>
+        </FormItem>
+        <FormItem
+          name="confirm"
+          dependencies={['formPassword']}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: 'Please confirm your password!',
+            },
+            ({ getFieldValue }) => ({
+              validator(rule, value) {
+                if (!value || getFieldValue('formPassword') === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject('The two passwords that you entered do not match!');
+              },
+            }),
+          ]}
+        >
+          <Input.Password placeholder="Confirm password"/>
+        </FormItem>
+        <FormItem>
+          <Button type="primary" htmlType="submit">Sign Up</Button>
+        </FormItem>
       </Form>
     )
   }

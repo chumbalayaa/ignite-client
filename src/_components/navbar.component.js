@@ -1,8 +1,11 @@
 import React, {Component} from "react";
-import { Navbar, Button } from "react-bootstrap";
+import { Layout, Menu, Button, Avatar } from "antd";
+import { UserOutlined } from '../../node_modules/@ant-design/icons';
 
 import { history } from '../_helpers';
 import {authenticationService} from '../_services/';
+
+const { Header } = Layout;
 
 export default class NavigationBar extends Component {
   constructor(props){
@@ -22,23 +25,20 @@ export default class NavigationBar extends Component {
     const {currentUser} = this.state;
     let authenticatedNavbar;
     if (currentUser) {
-      authenticatedNavbar = <Navbar>
-        <Navbar.Brand href="#home">Ignite</Navbar.Brand>
-        <Navbar.Toggle />
-        <Navbar.Collapse>
-          <Navbar.Text>
-            Signed in as: {currentUser.firstName} {currentUser.lastName}
-          </Navbar.Text>
-        </Navbar.Collapse>
-        <Button variant="primary" type="submit" onClick={this.logout}>
-          Logout
-        </Button>
-      </Navbar>
+      authenticatedNavbar =
+      <Header style={{position: 'fixed', width: '100%' }}>
+        <div className="logo" />
+        <Menu style={{float: "right"}}>
+          <Avatar size={32} icon={<UserOutlined />} />
+            {currentUser.firstName} {currentUser.lastName}
+        <Button variant="primary" type="submit" onClick={this.logout}>Logout</Button>
+        </Menu>
+      </Header>
     } else {
-      authenticatedNavbar = <Navbar>
-        <Navbar.Brand href="#home">Ignite</Navbar.Brand>
-        <Navbar.Toggle />
-      </Navbar>
+      authenticatedNavbar =
+      <Header style={{position: 'fixed', width: '100%' }}>
+        <div className="logo" />
+      </Header>
     }
     return (
         <div>{authenticatedNavbar}</div>

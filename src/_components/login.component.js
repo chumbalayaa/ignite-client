@@ -1,27 +1,36 @@
 import React, {Component} from "react";
-import {Form, Button} from "react-bootstrap";
+import {Form, Input, Button, Checkbox } from "antd";
+import { UserOutlined, LockOutlined } from '../../node_modules/@ant-design/icons';
 import axios from 'axios';
 
+const FormItem = Form.Item;
+
 export default class Login extends Component {
+  onFinish(values) {
+    console.log("received values of ", values);
+  };
+
   render() {
     return (
-      <Form>
-        <Form.Label>Log In</Form.Label>
-        <Form.Group controlId="basicEmailLogin">
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control type="email" className="form-control" placeholder="Enter email"/>
-        </Form.Group>
-        <Form.Group controlId="basicPasswordLogin">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" className="form-control" placeholder="Enter password"/>
-        </Form.Group>
-        <Form.Group controlId="basicRememberMeCheck">
-          <Form.Check />
-          <Form.Label>Remember me</Form.Label>
-        </Form.Group>
-        <Button variant="primary" type="submit" onClick={this.handleSubmit}>
-          Log In
-        </Button>
+      <Form onFinish={this.onFinish} className="login-form">
+        <FormItem name='Email' rules={[{ required: true, message: 'Please input your email'}]}>
+          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email address" />
+        </FormItem>
+        <FormItem name='Password' rules={[{ required: true, message: 'Please input your password'}]}>
+          <Input prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder ="Password" />
+        </FormItem>
+        <FormItem name="remember" valuePropName="checked" noStyle>
+          <FormItem>
+            <Checkbox>Remember me</Checkbox>
+          </FormItem>
+          <a className="login-form-forgot" href="">Forgot password</a>
+        </FormItem>
+        <FormItem>
+          <Button type="primary" htmlType="submit" className="login-form-button">
+            Log in
+          </Button>
+          Or <a href="">register now!</a>
+        </FormItem>
       </Form>
     )
   }
