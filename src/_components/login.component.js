@@ -4,20 +4,33 @@ import {
   UserOutlined,
   LockOutlined,
 } from "../../node_modules/@ant-design/icons";
+import { userService } from "../_services/user.service";
 import axios from "axios";
 
 const FormItem = Form.Item;
 
 export default class Login extends Component {
+  constructor (props) {
+    super(props);
+  }
+
   onFinish(values) {
     console.log("received values of ", values);
+    const req = {
+      email: values.email,
+      password: values.password
+    }
+    userService
+      .getUser(req)
+      .then((res) => console.log('hey', res))
+      .catch((err) => console.log('ho', err))
   }
 
   render() {
     return (
       <Form onFinish={this.onFinish} className="login-form">
         <FormItem
-          name="Email"
+          name="email"
           rules={[{ required: true, message: "Please input your email" }]}
         >
           <Input
@@ -26,7 +39,7 @@ export default class Login extends Component {
           />
         </FormItem>
         <FormItem
-          name="Password"
+          name="password"
           rules={[{ required: true, message: "Please input your password" }]}
         >
           <Input

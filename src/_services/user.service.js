@@ -4,11 +4,12 @@ import { handleResponse } from "../_helpers";
 
 export const userService = {
   createNewUser,
+  getUser
 };
 
 function createNewUser(newUser) {
   axios
-    .post("/api/users", newUser)
+    .post("/api/user", newUser)
     .then(handleResponse.handleResponse)
     .then((res) => {
       if (res.data) {
@@ -21,14 +22,20 @@ function createNewUser(newUser) {
     .catch((err) => console.log(err));
 }
 
-function pullUser(email, password) {
+//Gets users with email and pass (req.email and req.password)
+async function getUser(req) {
+  console.log(req);
   axios
-    .get("/api/user", email, password)
+    .get("/api/user", {params: {email: req.email, password: req.password}
+  })
     .then((res) => {
       if (res.data) {
-        console.log(res.data);
+        console.log('we have data');
+        return res.data;
       } else {
-        console.log("error");
+        console.log('no data');
+        let poop = 'poop'
+        return poop;
       }
     })
     .catch((err) => console.log(err));
