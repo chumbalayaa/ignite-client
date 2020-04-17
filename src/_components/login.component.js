@@ -7,19 +7,21 @@ import {
 import { userService } from "../_services/user.service";
 import axios from "axios";
 
+import { history } from "../_helpers";
+
 const FormItem = Form.Item;
 
 export default class Login extends Component {
   constructor (props) {
     super(props);
-  }
 
-  handleFailedResponse () {
-    console.log("hi");
+    this.handleSuccessResponse = this.handleSuccessResponse.bind(this);
+    this.onFinish = this.onFinish.bind(this);
   }
 
   handleSuccessResponse (res) {
     console.log(res);
+    // history.push('/');
   }
 
   onFinish(values) {
@@ -28,7 +30,9 @@ export default class Login extends Component {
       password: values.password
     }
     return userService.getUser(req)
-      .then((res) => this.handleSuccessResponse(res))
+      //.then((res) => console.log(err))
+      .then(result => this.handleSuccessResponse(result))
+      .catch((err) => console.log('heyo', err))
   }
 
   render() {

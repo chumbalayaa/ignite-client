@@ -2,10 +2,6 @@ import { BehaviorSubject } from "rxjs";
 
 import axios from "axios";
 
-import { history } from "../_helpers";
-
-console.log(localStorage.getItem('currentUser'));
-
 const currentUserSubject = new BehaviorSubject(
   JSON.parse(localStorage.getItem("currentUser"))
 );
@@ -24,7 +20,6 @@ async function storeUserAuth(user) {
   console.log("auth time");
   localStorage.setItem("currentUser", JSON.stringify(user));
   currentUserSubject.next(user);
-  history.push('/');
 }
 
 function logout() {

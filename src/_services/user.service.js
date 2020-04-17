@@ -7,6 +7,7 @@ export const userService = {
   getUser
 };
 
+//Create new user from sign-up, then auth
 function createNewUser(newUser) {
   axios
     .post("/api/user", newUser)
@@ -14,7 +15,7 @@ function createNewUser(newUser) {
     .then((res) => {
       if (res.data) {
         alert("Success");
-        //authenticationService.storeUserAuth(newUser);
+        authenticationService.storeUserAuth(newUser);
       } else {
         console.log("ERROR");
       }
@@ -22,18 +23,20 @@ function createNewUser(newUser) {
     .catch((err) => console.log(err));
 }
 
-//Login user with email and pass (req.email and req.password)
+//Login user with email and pass (req.email and req.password) - then auth
 async function getUser(req) {
   console.log(req);
   return axios
-    .get("/api/user", {params: {email: req.email, password: req.password}
-  })
+    .get("/api/user", {params: {email: req.email, password: req.password}})
+    .then(handleResponse.handleResponse)
     .then((res) => {
       if (res.data) {
         console.log('we have data');
         return res.data;
+        //authenticationService.storeUserAuth(newUser);
       } else {
         console.log('no data');
+        return 'no data';
       }
     })
     .catch((err) => console.log(err));
