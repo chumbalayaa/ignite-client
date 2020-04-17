@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Layout, Menu, Button, Avatar } from "antd";
 
-const {Header} = Layout;
+const {Header, Content} = Layout;
 
 export default class Explainer extends Component {
   constructor(props) {
@@ -11,7 +11,12 @@ export default class Explainer extends Component {
   render() {
     return(
       <Layout>
-        Explaining
+        <Header><h2>What we do</h2></Header>
+        <Layout>
+          <Content>
+            <p>WHAT UPPPPP</p>
+          </Content>
+        </Layout>
       </Layout>
     );
   }
