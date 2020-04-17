@@ -20,6 +20,7 @@ async function storeUserAuth(user) {
   console.log("auth time");
   localStorage.setItem("currentUser", JSON.stringify(user));
   currentUserSubject.next(user);
+  return true;
 }
 
 function logout() {

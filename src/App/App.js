@@ -4,10 +4,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Layout } from "antd";
 
 import { HomePage } from "../HomePage/HomePage";
+import { SignupPage } from "../SignupPage/SignupPage";
+import { LoginPage } from "../LoginPage/LoginPage";
 
-import Login from "../_components/login.component";
-import Signup from "../_components/signup.component";
-import NavigationBar from "../_components/navbar.component";
 import { PrivateRoute } from "../_components/PrivateRoute";
 
 import { history } from "../_helpers";
@@ -34,14 +33,11 @@ class App extends React.Component {
         <div className="App">
           <div className="auth-wrapper">
             <Layout>
-              <NavigationBar {...this.state} />
-              <div className="auth-inner">
                 <Switch>
                   <PrivateRoute exact path="/" component={HomePage} />
-                  <Route path="/sign-in" component={Login} />
-                  <Route path="/sign-up" component={Signup} />
+                  <Route path="/log-in" component={LoginPage} />
+                  <Route path="/sign-up" component={SignupPage} />
                 </Switch>
-              </div>
             </Layout>
           </div>
         </div>

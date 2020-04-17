@@ -3,11 +3,25 @@ import { Form, Input, Button, Checkbox } from "antd";
 
 import { userService } from "../_services/user.service";
 
+import { history } from "../_helpers";
+
 const FormItem = Form.Item;
 
 export default class Signup extends Component {
   constructor(props) {
     super(props);
+
+    this.handleResponse = this.handleResponse.bind(this);
+    this.onFinish = this.onFinish.bind(this);
+  }
+
+  handleResponse (res) {
+    if (res){
+      history.push('/');
+      window.location.reload(true);
+    }else {
+      alert("Not authorized, please try again");
+    }
   }
 
   onFinish(values) {
@@ -17,7 +31,10 @@ export default class Signup extends Component {
       email: values.formEmail,
       password: values.formPassword,
     };
-    userService.createNewUser(newUser);
+    console.log(newUser);
+    return userService.createNewUser(newUser)
+      .then((result) => this.handleResponse(result))
+      .catch((err) => console.log(err))
   }
 
   render() {

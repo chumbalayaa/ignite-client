@@ -15,13 +15,18 @@ export default class Login extends Component {
   constructor (props) {
     super(props);
 
-    this.handleSuccessResponse = this.handleSuccessResponse.bind(this);
+    this.handleResponse = this.handleResponse.bind(this);
     this.onFinish = this.onFinish.bind(this);
   }
 
-  handleSuccessResponse (res) {
+  handleResponse (res) {
     console.log(res);
-    // history.push('/');
+    if (res){
+      history.push('/');
+      window.location.reload(true);
+    }else {
+      alert("Not authorized, please try again");
+    }
   }
 
   onFinish(values) {
@@ -30,8 +35,7 @@ export default class Login extends Component {
       password: values.password
     }
     return userService.getUser(req)
-      //.then((res) => console.log(err))
-      .then(result => this.handleSuccessResponse(result))
+      .then(result => this.handleResponse(result))
       .catch((err) => console.log('heyo', err))
   }
 
@@ -73,7 +77,7 @@ export default class Login extends Component {
           >
             Log in
           </Button>
-          Or <a href="">register now!</a>
+          Or <a href="/sign-up">register now!</a>
         </FormItem>
       </Form>
     );

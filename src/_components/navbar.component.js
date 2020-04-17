@@ -17,7 +17,7 @@ export default class NavigationBar extends Component {
 
   logout() {
     authenticationService.logout();
-    history.push("/sign-in");
+    history.push("/log-in");
     window.location.reload(true);
   }
 
@@ -26,7 +26,8 @@ export default class NavigationBar extends Component {
     let authenticatedNavbar;
     if (currentUser) {
       authenticatedNavbar = (
-        <Header style={{ position: "fixed", width: "100%" }}>
+        <Layout>
+        <Header id="mainNav" style={{ position: "fixed", width: "100%" }}>
           <div className="logo" />
           <Menu style={{ float: "right" }}>
             <Avatar size={32} icon={<UserOutlined />} />
@@ -36,12 +37,15 @@ export default class NavigationBar extends Component {
             </Button>
           </Menu>
         </Header>
+        </Layout>
       );
     } else {
       authenticatedNavbar = (
-        <Header style={{ position: "fixed", width: "100%" }}>
+        <Layout>
+        <Header id="mainNavUnAuth" style={{ position: "fixed", width: "100%" }}>
           <div className="logo" />
         </Header>
+        </Layout>
       );
     }
     return <div>{authenticatedNavbar}</div>;

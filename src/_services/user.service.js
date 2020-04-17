@@ -8,14 +8,14 @@ export const userService = {
 };
 
 //Create new user from sign-up, then auth
-function createNewUser(newUser) {
-  axios
+async function createNewUser(newUser) {
+  return axios
     .post("/api/user", newUser)
     .then(handleResponse.handleResponse)
     .then((res) => {
       if (res.data) {
-        alert("Success");
-        authenticationService.storeUserAuth(newUser);
+        console.log("Success");
+        return authenticationService.storeUserAuth(newUser);
       } else {
         console.log("ERROR");
       }
@@ -32,11 +32,16 @@ async function getUser(req) {
     .then((res) => {
       if (res.data) {
         console.log('we have data');
-        return res.data;
-        //authenticationService.storeUserAuth(newUser);
+        console.log(res.data);
+        const newUser = {
+          firstName: res.data.firstName,
+          lastName: res.data.lastName,
+          email: res.data.email,
+          password: res.data.password
+        };
+        return authenticationService.storeUserAuth(newUser);
       } else {
         console.log('no data');
-        return 'no data';
       }
     })
     .catch((err) => console.log(err));
