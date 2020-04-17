@@ -34,12 +34,12 @@ class LoginPage extends React.Component {
         </Header>
         <Layout style={{paddingTop:'10px'}}>
         <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
-          <Col className="gutter-row" span={12}>
-          <div class="auth-inner">
+          <Col className="gutter-row" span={14}>
+          <div class="auth-inner" style={{width:'100%'}}>
             <Explainer />
             </div>
           </Col>
-          <Col className="gutter-row" span={12}>
+          <Col className="gutter-row" span={10}>
             <div class="auth-inner">
             <Login/>
             </div>
