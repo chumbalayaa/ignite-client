@@ -19,7 +19,7 @@ class SignupPage extends React.Component {
       currentUser: authenticationService.currentUserValue,
     };
 
-    if (this.state) {
+    if (this.state.currentUser) {
       this.props.history.push('/');
     }
   }
