@@ -14,16 +14,21 @@ export default class Login extends Component {
     super(props);
   }
 
+  handleFailedResponse () {
+    console.log("hi");
+  }
+
+  handleSuccessResponse (res) {
+    console.log(res);
+  }
+
   onFinish(values) {
-    console.log("received values of ", values);
     const req = {
       email: values.email,
       password: values.password
     }
-    userService
-      .getUser(req)
-      .then((res) => console.log('hey', res))
-      .catch((err) => console.log('ho', err))
+    return userService.getUser(req)
+      .then((res) => this.handleSuccessResponse(res))
   }
 
   render() {

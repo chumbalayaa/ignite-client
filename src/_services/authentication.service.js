@@ -2,6 +2,10 @@ import { BehaviorSubject } from "rxjs";
 
 import axios from "axios";
 
+import { history } from "../_helpers";
+
+console.log(localStorage.getItem('currentUser'));
+
 const currentUserSubject = new BehaviorSubject(
   JSON.parse(localStorage.getItem("currentUser"))
 );
@@ -15,11 +19,12 @@ export const authenticationService = {
   },
 };
 
-function storeUserAuth(user) {
+async function storeUserAuth(user) {
   // store user details and jwt token in local storage to keep user logged in between page refreshes
+  console.log("auth time");
   localStorage.setItem("currentUser", JSON.stringify(user));
   currentUserSubject.next(user);
-  return true;
+  history.push('/');
 }
 
 function logout() {
