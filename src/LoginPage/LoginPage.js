@@ -9,7 +9,9 @@ import NavigationBar from "../_components/navbar.component";
 
 import { authenticationService } from "../_services/";
 
-const {Header, Sider, Content} = Layout;
+import "./LoginPage.css";
+
+const { Header, Sider, Content } = Layout;
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -20,31 +22,33 @@ class LoginPage extends React.Component {
     };
 
     if (this.state.currentUser) {
-      this.props.history.push('/');
+      this.props.history.push("/");
     }
   }
 
   render() {
     const { currentUser } = this.state;
-    const style = {padding: '8px 0'};
+    const style = { padding: "8px 0" };
     return (
       <Layout>
         <Header>
           <NavigationBar {...this.state} />
         </Header>
-        <Layout style={{paddingTop:'10px'}}>
-        <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
-          <Col className="gutter-row" span={14}>
-          <div class="auth-inner" style={{width:'100%'}}>
-            <Explainer />
-            </div>
-          </Col>
-          <Col className="gutter-row" span={10}>
-            <div class="auth-inner">
-            <Login/>
-            </div>
-          </Col>
-        </Row>
+        <Layout style={{ paddingTop: "10px" }}>
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <Col className="gutter-row" span={14}>
+              <div class="explainer">
+                <Explainer />
+              </div>
+            </Col>
+            <Col className="gutter-row" span={10}>
+              <div class="auth-wrapper">
+                <div class="auth-inner">
+                  <Login />
+                </div>
+              </div>
+            </Col>
+          </Row>
         </Layout>
       </Layout>
     );

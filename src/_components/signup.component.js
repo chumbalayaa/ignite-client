@@ -15,11 +15,11 @@ export default class Signup extends Component {
     this.onFinish = this.onFinish.bind(this);
   }
 
-  handleResponse (res) {
-    if (res){
-      history.push('/');
+  handleResponse(res) {
+    if (res) {
+      history.push("/");
       window.location.reload(true);
-    }else {
+    } else {
       alert("Not authorized, please try again");
     }
   }
@@ -32,9 +32,10 @@ export default class Signup extends Component {
       password: values.formPassword,
     };
     console.log(newUser);
-    return userService.createNewUser(newUser)
+    return userService
+      .createNewUser(newUser)
       .then((result) => this.handleResponse(result))
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
   }
 
   render() {

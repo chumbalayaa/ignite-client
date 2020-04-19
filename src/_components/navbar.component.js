@@ -27,24 +27,27 @@ export default class NavigationBar extends Component {
     if (currentUser) {
       authenticatedNavbar = (
         <Layout>
-        <Header id="mainNav" style={{ position: "fixed", width: "100%" }}>
-          <div className="logo" />
-          <Menu style={{ float: "right" }}>
-            <Avatar size={32} icon={<UserOutlined />} />
-            {currentUser.firstName} {currentUser.lastName}
-            <Button variant="primary" type="submit" onClick={this.logout}>
-              Logout
-            </Button>
-          </Menu>
-        </Header>
+          <Header id="mainNav" style={{ position: "fixed", width: "100%" }}>
+            <div className="logo" />
+            <Menu style={{ float: "right" }}>
+              <Avatar size={32} icon={<UserOutlined />} />
+              {currentUser.firstName} {currentUser.lastName}
+              <Button variant="primary" type="submit" onClick={this.logout}>
+                Logout
+              </Button>
+            </Menu>
+          </Header>
         </Layout>
       );
     } else {
       authenticatedNavbar = (
         <Layout>
-        <Header id="mainNavUnAuth" style={{ position: "fixed", width: "100%" }}>
-          <div className="logo" />
-        </Header>
+          <Header
+            id="mainNavUnAuth"
+            style={{ position: "fixed", width: "100%" }}
+          >
+            <div className="logo" />
+          </Header>
         </Layout>
       );
     }

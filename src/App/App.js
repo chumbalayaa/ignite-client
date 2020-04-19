@@ -31,15 +31,13 @@ class App extends React.Component {
     return (
       <Router history={history}>
         <div className="App">
-          <div className="auth-wrapper">
-            <Layout>
-                <Switch>
-                  <PrivateRoute exact path="/" component={HomePage} />
-                  <Route path="/log-in" component={LoginPage} />
-                  <Route path="/sign-up" component={SignupPage} />
-                </Switch>
-            </Layout>
-          </div>
+          <Layout>
+            <Switch>
+              <PrivateRoute exact path="/" component={HomePage} />
+              <Route path="/log-in" component={LoginPage} />
+              <Route path="/sign-up" component={SignupPage} />
+            </Switch>
+          </Layout>
         </div>
       </Router>
     );

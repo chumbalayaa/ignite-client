@@ -9,7 +9,7 @@ import NavigationBar from "../_components/navbar.component";
 
 import { authenticationService } from "../_services/";
 
-const {Header, Sider, Content} = Layout;
+const { Header, Sider, Content } = Layout;
 
 class SignupPage extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class SignupPage extends React.Component {
     };
 
     if (this.state.currentUser) {
-      this.props.history.push('/');
+      this.props.history.push("/");
     }
   }
 
@@ -32,16 +32,16 @@ class SignupPage extends React.Component {
           <NavigationBar {...this.state} />
         </Header>
         <Layout>
-        <div class="auth-inner">
-        <Sider>
-          <Explainer />
-        </Sider>
-        </div>
-        <Content style={{paddingTop: '15px'}}>
-        <div class="auth-inner">
-          <Signup />
+          <div class="auth-inner">
+            <Sider>
+              <Explainer />
+            </Sider>
           </div>
-        </Content>
+          <Content style={{ paddingTop: "15px" }}>
+            <div class="auth-inner">
+              <Signup />
+            </div>
+          </Content>
         </Layout>
       </Layout>
     );

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Form, Input, Button, Checkbox } from "antd";
+import React, { Component, useState } from "react";
+import { Alert, Form, Input, Button, Checkbox } from "antd";
 import {
   UserOutlined,
   LockOutlined,
@@ -12,36 +12,37 @@ import { history } from "../_helpers";
 const FormItem = Form.Item;
 
 export default class Login extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.handleResponse = this.handleResponse.bind(this);
     this.onFinish = this.onFinish.bind(this);
   }
 
-  handleResponse (res) {
+  handleResponse(res) {
     console.log(res);
-    if (res){
-      history.push('/');
+    if (res) {
+      history.push("/");
       window.location.reload(true);
-    }else {
-      alert("Not authorized, please try again");
+    } else {
+      alert("Failure");
     }
   }
 
   onFinish(values) {
     const req = {
       email: values.email,
-      password: values.password
-    }
-    return userService.getUser(req)
-      .then(result => this.handleResponse(result))
-      .catch((err) => console.log('heyo', err))
+      password: values.password,
+    };
+    return userService
+      .getUser(req)
+      .then((result) => this.handleResponse(result))
+      .catch((err) => console.log("heyo", err));
   }
 
   render() {
     return (
-      <Form onFinish={this.onFinish} className="login-form">
+      <Form onFinish={this.onFinish} className="login-form" id="loginForm">
         <FormItem
           name="email"
           rules={[{ required: true, message: "Please input your email" }]}
@@ -65,7 +66,7 @@ export default class Login extends Component {
           <FormItem>
             <Checkbox>Remember me</Checkbox>
           </FormItem>
-          <a className="login-form-forgot" href="">
+          <a className="forgot-password" href="">
             Forgot password
           </a>
         </FormItem>

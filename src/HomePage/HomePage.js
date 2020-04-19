@@ -5,7 +5,7 @@ import { userService, authenticationService } from "../_services";
 
 import { Layout } from "antd";
 
-const {Header, Sider, Content} = Layout;
+const { Header, Sider, Content } = Layout;
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -20,14 +20,14 @@ class HomePage extends React.Component {
     const { currentUser } = this.state;
     return (
       <Layout>
-      <Header>
-        <NavigationBar {...this.state} />
-      </Header>
-      <div>
-        <h1>Hi {currentUser.firstName}!</h1>
-        <p>You're logged in with React & JWT!!</p>
-        <h3>Users from secure api end point:</h3>
-      </div>
+        <Header>
+          <NavigationBar {...this.state} />
+        </Header>
+        <div>
+          <h1>Hi {currentUser.firstName}!</h1>
+          <p>You're logged in with React & JWT!!</p>
+          <h3>Users from secure api end point:</h3>
+        </div>
       </Layout>
     );
   }

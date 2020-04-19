@@ -4,7 +4,7 @@ import { handleResponse } from "../_helpers";
 
 export const userService = {
   createNewUser,
-  getUser
+  getUser,
 };
 
 //Create new user from sign-up, then auth
@@ -27,21 +27,21 @@ async function createNewUser(newUser) {
 async function getUser(req) {
   console.log(req);
   return axios
-    .get("/api/user", {params: {email: req.email, password: req.password}})
+    .get("/api/user", { params: { email: req.email, password: req.password } })
     .then(handleResponse.handleResponse)
     .then((res) => {
       if (res.data) {
-        console.log('we have data');
+        console.log("we have data");
         console.log(res.data);
         const newUser = {
           firstName: res.data.firstName,
           lastName: res.data.lastName,
           email: res.data.email,
-          password: res.data.password
+          password: res.data.password,
         };
         return authenticationService.storeUserAuth(newUser);
       } else {
-        console.log('no data');
+        console.log("no data");
       }
     })
     .catch((err) => console.log(err));
