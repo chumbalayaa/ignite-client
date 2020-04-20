@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { List, Typography, Divider, Layout, Menu, Button, Avatar } from "antd";
+import "../LoginPage/LoginPage.css";
 
 const { Title } = Typography;
 const { Header, Content, Footer } = Layout;
@@ -9,53 +10,25 @@ export default class Explainer extends Component {
   constructor(props) {
     super(props);
 
-    this.artistUsers = [
-      "Musicians promoting themselves or looking for gigs and projects",
-      "Visual artists seeking buyers or gallery presence",
-      "Lighting, sound and other technical artists looking for contract work",
-    ];
-
-    this.industryUsers = [
-      "Some other text that is random",
-      "IDK maybe some promotors want to book talent for their projects",
-    ];
-
-    this.consumerUsers = [
-      "People who need a wedding band",
-      "Bar owners who want some live music in their establishment",
+    this.userData = [
+      "Artists promoting themselves or looking for gigs and projects",
+      "Industry professionals booking talent and artists for concerts or other projects",
+      "Consumers or small business owners searching for artists - maybe a live band or wedding singer"
     ];
   }
 
   render() {
     return (
-      <Layout>
+      <Layout class="explainer">
         <Header>
           <Title style={{ color: "white" }}>What is Ignite?</Title>
         </Header>
         <Layout>
           <Content>
-            <Title level={3}>
-              Ignite is a platform for artist talent, used by:
-            </Title>
-            <Divider orientation="left">Artists</Divider>
+            <Divider orientation="left">Ignite is a platform for artist talent, used by:</Divider>
             <List
               size="small"
-              bordered
-              dataSource={this.artistUsers}
-              renderItem={(item) => <ListItem>{item}</ListItem>}
-            />
-            <Divider orientation="left">Industry professionals</Divider>
-            <List
-              size="small"
-              bordered
-              dataSource={this.industryUsers}
-              renderItem={(item) => <ListItem>{item}</ListItem>}
-            />
-            <Divider orientation="left">Consumers</Divider>
-            <List
-              size="small"
-              bordered
-              dataSource={this.consumerUsers}
+              dataSource={this.userData}
               renderItem={(item) => <ListItem>{item}</ListItem>}
             />
           </Content>

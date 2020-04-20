@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import { Layout, Menu, Button, Avatar } from "antd";
+import { Typography, Layout, Menu, Button, Avatar } from "antd";
 import { UserOutlined } from "../../node_modules/@ant-design/icons";
 
 import { history } from "../_helpers";
 import { authenticationService } from "../_services/";
 
 const { Header } = Layout;
+const { Title } = Typography;
+
+const MenuItem = Menu.Item;
 
 export default class NavigationBar extends Component {
   constructor(props) {
@@ -27,25 +30,25 @@ export default class NavigationBar extends Component {
     if (currentUser) {
       authenticatedNavbar = (
         <Layout>
-          <Header id="mainNav" style={{ position: "fixed", width: "100%" }}>
+          <Header id="mainNav">
             <div className="logo" />
-            <Menu style={{ float: "right" }}>
-              <Avatar size={32} icon={<UserOutlined />} />
-              {currentUser.firstName} {currentUser.lastName}
-              <Button variant="primary" type="submit" onClick={this.logout}>
-                Logout
-              </Button>
+            <Menu id='mainNavLeft' theme='dark' mode='horizontal' defaulSelectedKeys={['1']}>
+              <MenuItem key='1'><a href='/'>Home</a></MenuItem>
             </Menu>
+            <div id='mainNavRight'>
+              <div id="userNavData">
+                <Avatar id="userPicNav" size={32} icon={<UserOutlined />} />
+                <Title id="userNameNav" level={4}> <a href='/profile'> {currentUser.firstName} {currentUser.lastName} </a></Title>
+              </div>
+              <Button id="navLogoutButton" type="dashed" danger onClick={this.logout}>Logout</Button>
+            </div>
           </Header>
         </Layout>
       );
     } else {
       authenticatedNavbar = (
         <Layout>
-          <Header
-            id="mainNavUnAuth"
-            style={{ position: "fixed", width: "100%" }}
-          >
+          <Header id="mainNav">
             <div className="logo" />
           </Header>
         </Layout>

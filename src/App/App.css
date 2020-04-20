@@ -40,3 +40,46 @@
     transform: rotate(360deg);
   }
 }
+
+#mainNav {
+  width: 100%;
+  position: fixed;
+  text-align: right;
+}
+
+#mainNavLeft {
+  float: left;
+}
+
+#mainNavRight {
+  width: 50%;
+  float: right;
+  display: inline-block;
+}
+
+#userNavData {
+  display: inline-block;
+  width: 20%;
+  background-color: white;
+  margin: 2px;
+  padding: 5px 5px 5px 5px;
+  border-radius: 10px;
+}
+
+#userPicNav {
+  display: inline-block;
+  float: left;
+}
+
+#userNameNav {
+  display: inline-block;
+  margin-left: 3px;
+  float: left;
+}
+
+#navLogoutButton {
+  display: inline-block;
+  float: right;
+  margin-top: 2px;
+  margin-left: 10px;
+}
