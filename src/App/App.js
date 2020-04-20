@@ -6,6 +6,7 @@ import { Layout } from "antd";
 import { HomePage } from "../HomePage/HomePage";
 import { SignupPage } from "../SignupPage/SignupPage";
 import { LoginPage } from "../LoginPage/LoginPage";
+import { ProfilePage } from "../ProfilePage/ProfilePage";
 
 import { PrivateRoute } from "../_components/PrivateRoute";
 
@@ -34,6 +35,7 @@ class App extends React.Component {
           <Layout>
             <Switch>
               <PrivateRoute exact path="/" component={HomePage} />
+              <PrivateRoute exact path="/profile" component={ProfilePage} />
               <Route path="/log-in" component={LoginPage} />
               <Route path="/sign-up" component={SignupPage} />
             </Switch>

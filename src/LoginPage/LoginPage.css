@@ -1,3 +1,7 @@
+.login-inner {
+  padding-top: 10px;
+}
+
 .explainer {
   width: 600px;
   margin: auto;
@@ -6,4 +10,22 @@
   padding: 40px 55px 45px 55px;
   border-radius: 15px;
   transition: all 0.3s;
+}
+
+#login-row {
+  display: inline;
+}
+
+#explainer-col {
+  float: left;
+  margin-left: 10%;
+}
+
+#login-col {
+  float: left;
+  vertical-align: top;
+}
+
+#loginForm {
+  width: auto
 }
