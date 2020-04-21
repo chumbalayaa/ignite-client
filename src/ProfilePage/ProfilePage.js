@@ -8,6 +8,8 @@ import ProfileSecondary from "../_components/profilesecondary.component";
 
 import { authenticationService } from "../_services/";
 
+import "./ProfilePage.css";
+
 const { Header, Sider, Content } = Layout;
 
 class ProfilePage extends React.Component {

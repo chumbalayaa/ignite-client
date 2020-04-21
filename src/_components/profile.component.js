@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Layout, Row, Col, Divider } from "antd";
+import { Typography, Layout, Row, Col, Divider } from "antd";
 import { userService } from "../_services/user.service";
 
 import { authenticationService } from "../_services/";
 
 const { Header, Sider, Content, Footer } = Layout;
+const { Title } = Typography;
 
 export default class Profile extends Component {
   constructor(props) {
@@ -17,12 +18,12 @@ export default class Profile extends Component {
   }
 
   render() {
+    const { currentUser } = this.state;
     return (
       <div id="profileMain">
-        Hey
         <Row>
           <Col id="profileName" span={12} offset={6}>
-            Hey
+            <Title level={3}> {currentUser.firstName}</Title>
           </Col>
         </Row>
       </div>

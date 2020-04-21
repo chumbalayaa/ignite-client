@@ -1,0 +1,12 @@
+#profileMain {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 2px 2px 2px 2px;
+}
+
+#profileSecondary {
+}
+
+#profile-row-main {
+  margin: 10px 0 10px 0;
+}

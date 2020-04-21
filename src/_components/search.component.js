@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Layout, Input, Select } from "antd";
 
 import { history } from "../_helpers";
-import { artistService } from "../_services/artistService";
-import { projectService } from "../_services/projectService";
+import { artistService } from "../_services/artist.service";
+import { projectService } from "../_services/project.service";
 
 const { Search } = Input;
 const { Option } = Select;

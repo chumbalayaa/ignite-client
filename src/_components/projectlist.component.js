@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Layout, Input, Select, Button, Checkbox } from "antd";
-import { userService } from "../_services/user.service";
+import { projectService } from "../_services/project.service";
 
 import { history } from "../_helpers";
 
@@ -14,6 +14,6 @@ export default class ProjectListComponent extends Component {
   }
 
   render() {
-    return <div></div>;
+    return <div id="projectListMain"></div>;
   }
 }
