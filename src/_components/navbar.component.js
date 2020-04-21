@@ -29,7 +29,6 @@ export default class NavigationBar extends Component {
     let authenticatedNavbar;
     if (currentUser) {
       authenticatedNavbar = (
-        <Layout>
           <Header id="mainNav">
             <div className="logo" />
             <Menu id='mainNavLeft' theme='dark' mode='horizontal' defaulSelectedKeys={['1']}>
@@ -43,15 +42,12 @@ export default class NavigationBar extends Component {
               <Button id="navLogoutButton" type="dashed" danger onClick={this.logout}>Logout</Button>
             </div>
           </Header>
-        </Layout>
       );
     } else {
       authenticatedNavbar = (
-        <Layout>
           <Header id="mainNav">
             <div className="logo" />
           </Header>
-        </Layout>
       );
     }
     return <div>{authenticatedNavbar}</div>;

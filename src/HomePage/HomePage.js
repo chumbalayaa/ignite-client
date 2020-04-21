@@ -8,7 +8,7 @@ import { Layout } from "antd";
 
 import './HomePage.css';
 
-const { Header, Sider, Content } = Layout;
+const { Header, Sider, Content, Footer } = Layout;
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -23,13 +23,11 @@ class HomePage extends React.Component {
     const { currentUser } = this.state;
     return (
       <Layout>
-        <Header>
+	<Header>
           <NavigationBar {...this.state} />
         </Header>
-        <div>
-          <h1>Hi {currentUser.firstName}!</h1>
-        </div>
         <SearchComponent />
+        <Footer />
       </Layout>
     );
   }

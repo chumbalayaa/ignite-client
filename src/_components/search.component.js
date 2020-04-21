@@ -56,7 +56,7 @@ export default class SearchComponent extends Component {
   render() {
     const { searchResults } = this.state;
     return (
-      <Layout>
+      <Content id="searchMain">
         <Input.Group style={{display:'inline-block'}} compact>
           <Select style={{float:'left', width: '10%', marginLeft: '5%'}} size='large' defaultValue="Artist"
             onChange ={this.handleToggleChange}>
@@ -72,7 +72,7 @@ export default class SearchComponent extends Component {
         {searchResults &&
           <div>hi</div>
         }
-      </Layout>
+      </Content>
     );
   }
 }

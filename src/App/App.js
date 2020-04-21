@@ -32,14 +32,12 @@ class App extends React.Component {
     return (
       <Router history={history}>
         <div className="App">
-          <Layout>
             <Switch>
               <PrivateRoute exact path="/" component={HomePage} />
               <PrivateRoute exact path="/profile" component={ProfilePage} />
               <Route path="/log-in" component={LoginPage} />
               <Route path="/sign-up" component={SignupPage} />
             </Switch>
-          </Layout>
         </div>
       </Router>
     );
