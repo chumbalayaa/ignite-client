@@ -6,7 +6,7 @@ import { userService, authenticationService } from "../_services";
 
 import { Layout } from "antd";
 
-import './HomePage.css';
+import "./HomePage.css";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -23,7 +23,7 @@ class HomePage extends React.Component {
     const { currentUser } = this.state;
     return (
       <Layout>
-	<Header>
+        <Header>
           <NavigationBar {...this.state} />
         </Header>
         <SearchComponent />

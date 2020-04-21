@@ -29,25 +29,45 @@ export default class NavigationBar extends Component {
     let authenticatedNavbar;
     if (currentUser) {
       authenticatedNavbar = (
-          <Header id="mainNav">
-            <div className="logo" />
-            <Menu id='mainNavLeft' theme='dark' mode='horizontal' defaulSelectedKeys={['1']}>
-              <MenuItem key='1'><a href='/'>Home</a></MenuItem>
-            </Menu>
-            <div id='mainNavRight'>
-              <div id="userNavData">
-                <Avatar id="userPicNav" size={32} icon={<UserOutlined />} />
-                <Title id="userNameNav" level={4}> <a href='/profile'> {currentUser.firstName} {currentUser.lastName} </a></Title>
-              </div>
-              <Button id="navLogoutButton" type="dashed" danger onClick={this.logout}>Logout</Button>
+        <Header id="mainNav">
+          <div className="logo" />
+          <Menu
+            id="mainNavLeft"
+            theme="dark"
+            mode="horizontal"
+            defaulSelectedKeys={["1"]}
+          >
+            <MenuItem key="1">
+              <a href="/">Home</a>
+            </MenuItem>
+          </Menu>
+          <div id="mainNavRight">
+            <div id="userNavData">
+              <Avatar id="userPicNav" size={32} icon={<UserOutlined />} />
+              <Title id="userNameNav" level={4}>
+                {" "}
+                <a href="/profile">
+                  {" "}
+                  {currentUser.firstName} {currentUser.lastName}{" "}
+                </a>
+              </Title>
             </div>
-          </Header>
+            <Button
+              id="navLogoutButton"
+              type="dashed"
+              danger
+              onClick={this.logout}
+            >
+              Logout
+            </Button>
+          </div>
+        </Header>
       );
     } else {
       authenticatedNavbar = (
-          <Header id="mainNav">
-            <div className="logo" />
-          </Header>
+        <Header id="mainNav">
+          <div className="logo" />
+        </Header>
       );
     }
     return <div>{authenticatedNavbar}</div>;

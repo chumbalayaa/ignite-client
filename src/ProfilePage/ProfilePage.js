@@ -15,7 +15,6 @@ class ProfilePage extends React.Component {
     this.state = {
       currentUser: authenticationService.currentUserValue,
     };
-
   }
 
   render() {

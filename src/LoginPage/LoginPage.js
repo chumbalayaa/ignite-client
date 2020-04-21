@@ -35,11 +35,11 @@ class LoginPage extends React.Component {
           <NavigationBar {...this.state} />
         </Header>
         <Layout className="login-inner">
-          <Row id='login-row' gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-            <Col id='explainer-col' className="gutter-row" span={14}>
+          <Row id="login-row" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <Col id="explainer-col" className="gutter-row" span={14}>
               <Explainer />
             </Col>
-            <Col id='login-col' className="gutter-row" span={10}>
+            <Col id="login-col" className="gutter-row" span={10}>
               <div class="auth-wrapper">
                 <div class="auth-inner">
                   <Login />
