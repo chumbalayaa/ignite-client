@@ -25,7 +25,6 @@ class SignupPage extends React.Component {
   }
 
   render() {
-    const { currentUser } = this.state;
     return (
       <Layout>
         <Header>

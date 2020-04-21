@@ -2,13 +2,13 @@ import React from "react";
 
 import NavigationBar from "../_components/navbar.component";
 import SearchComponent from "../_components/search.component";
-import { userService, authenticationService } from "../_services";
+import { authenticationService } from "../_services";
 
 import { Layout } from "antd";
 
 import "./HomePage.css";
 
-const { Header, Sider, Content, Footer } = Layout;
+const { Header, Footer } = Layout;
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -20,7 +20,6 @@ class HomePage extends React.Component {
   }
 
   render() {
-    const { currentUser } = this.state;
     return (
       <Layout>
         <Header>

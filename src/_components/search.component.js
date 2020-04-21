@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Layout, Input, Select, Button, Checkbox } from "antd";
-import { userService } from "../_services/user.service";
+import { Layout, Input, Select } from "antd";
 
 import { history } from "../_helpers";
 import { artistService } from "../_services/artistService";
@@ -8,7 +7,7 @@ import { projectService } from "../_services/projectService";
 
 const { Search } = Input;
 const { Option } = Select;
-const { Header, Sider, Content, Footer } = Layout;
+const { Content } = Layout;
 
 export default class SearchComponent extends Component {
   constructor(props) {
@@ -34,12 +33,12 @@ export default class SearchComponent extends Component {
       category: this.category,
       search: res,
     };
-    if (this.category == "Artist") {
+    if (this.category === "Artist") {
       return artistService
         .artistSearch(req)
         .then((result) => this.updateResults(result))
         .catch((err) => console.log("heyo", err));
-    } else if (this.category == "Project") {
+    } else if (this.category === "Project") {
       return projectService
         .projectSearch(req)
         .then((result) => this.updateResults(result))

@@ -3,7 +3,7 @@ import React from "react";
 import Explainer from "../_components/explainer.component";
 import Login from "../_components/login.component";
 
-import { Layout, Row, Col, Divider } from "antd";
+import { Layout, Row, Col } from "antd";
 
 import NavigationBar from "../_components/navbar.component";
 
@@ -11,7 +11,7 @@ import { authenticationService } from "../_services/";
 
 import "./LoginPage.css";
 
-const { Header, Sider, Content } = Layout;
+const { Header } = Layout;
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -27,8 +27,6 @@ class LoginPage extends React.Component {
   }
 
   render() {
-    const { currentUser } = this.state;
-    const style = { padding: "8px 0" };
     return (
       <Layout>
         <Header>

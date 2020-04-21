@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button } from "antd";
 
 import { userService } from "../_services/user.service";
 
