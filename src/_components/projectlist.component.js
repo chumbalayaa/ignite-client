@@ -47,7 +47,6 @@ export default class ProjectListComponent extends Component {
   }
 
   populateInitProjects(result) {
-    console.log(result);
     this.setState({
       initLoading: false,
       numLoaded: this.state.numLoaded + 1,
@@ -58,7 +57,7 @@ export default class ProjectListComponent extends Component {
 
   onLoadMore() {
     this.setState({
-      list: this.state.data.slice(0, count+this.state.numLoaded),
+      list: this.state.data.slice(0, count*this.state.numLoaded),
       numLoaded: this.state.numLoaded + 1,
     });
   }
@@ -71,11 +70,7 @@ export default class ProjectListComponent extends Component {
 
   handleCreate(project) {
     this.setState({
-      confirmLoading: true
-    });
-    console.log(project);
-    console.log(this.state.currentUser);
-    this.setState({
+      confirmLoading: true,
       visible: false
     });
     const req = {
@@ -85,16 +80,24 @@ export default class ProjectListComponent extends Component {
         type: project.type,
         requirements: project.requirements,
     }
+    console.log("Making new project ", project);
+    console.log(this.state);
     return projectService
       .createNewProject(req)
       .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => console.log(err))
-      .then(() => {
+        console.log("Updating DOM ", result);
+        const newData = this.state.data.concat([result]);
+        const newList = newData.slice(0, count*this.state.numLoaded);
         this.setState({
           confirmLoading: false,
-          visible: false,
+          data: newData,
+          list: newList,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({
+          confirmLoading: false,
         });
       })
   }
@@ -107,9 +110,8 @@ export default class ProjectListComponent extends Component {
 
   render() {
     const {initLoading, list, data, currentUser, visible} = this.state;
-    console.log(list);
     let loadMore;
-    if (!initLoading && (list !== data) && (data.length>0)) {
+    if (!initLoading && (list.length !== data.length) && (data.length>0)) {
       loadMore =
         <div
           style={{
@@ -158,9 +160,8 @@ export default class ProjectListComponent extends Component {
               <Skeleton title={false} loading={item.loading} active>
                 <ListItem.Meta
                   title={item.title}
-                  description="placeholder"
+                  description={'A ' + item.type + ' requiring '+ item.requirements}
                 />
-                <div>content</div>
               </Skeleton>
             </ListItem>
           )}

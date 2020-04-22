@@ -32,7 +32,8 @@ async function createNewProject(req) {
     })
       .then((res) => {
         if (res.data) {
-          console.log('data');
+          console.log('data ', res);
+          return res.data;
         } else {
           console.log("no data");
         }
