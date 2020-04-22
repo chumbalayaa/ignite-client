@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Layout, Row, Col, Divider } from "antd";
+import { Layout, Row, Col } from "antd";
 
 import NavigationBar from "../_components/navbar.component";
 import Profile from "../_components/profile.component";
@@ -10,7 +10,7 @@ import { authenticationService } from "../_services/";
 
 import "./ProfilePage.css";
 
-const { Header, Sider, Content } = Layout;
+const { Header, Content } = Layout;
 
 class ProfilePage extends React.Component {
   constructor(props) {

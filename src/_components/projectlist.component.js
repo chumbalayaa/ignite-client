@@ -1,12 +1,17 @@
 import React, { Component } from "react";
-import { Layout, Button, Skeleton, List } from "antd";
+import { Layout, Button, Skeleton, List, Row, Col, Typography, Modal, Form, Input, Radio } from "antd";
+import NewProjectModal from "./newproject.component";
+
 import { projectService } from "../_services/project.service";
 import { authenticationService } from "../_services/";
 
 import { history } from "../_helpers";
 
 const { Header, Sider, Content, Footer } = Layout;
+const { Title } = Typography;
 const ListItem = List.Item;
+const FormItem = Form.Item;
+const RadioGroup = Radio.Group;
 
 const count = 3;
 
@@ -19,10 +24,15 @@ export default class ProjectListComponent extends Component {
       initLoading: true,
       numLoaded: 0,
       data: [],
-      list: []
+      list: [],
+      visible: false,
+      confirmLoading: false,
     };
 
     this.onLoadMore = this.onLoadMore.bind(this);
+    this.showModal = this.showModal.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handleCreate = this.handleCreate.bind(this);
   }
 
   componentDidMount() {
@@ -37,8 +47,7 @@ export default class ProjectListComponent extends Component {
   }
 
   populateInitProjects(result) {
-    console.log(this.state.list);
-    console.log(this.state.data);
+    console.log(result);
     this.setState({
       initLoading: false,
       numLoaded: this.state.numLoaded + 1,
@@ -54,8 +63,51 @@ export default class ProjectListComponent extends Component {
     });
   }
 
+  showModal() {
+    this.setState({
+      visible: true,
+    });
+  }
+
+  handleCreate(project) {
+    this.setState({
+      confirmLoading: true
+    });
+    console.log(project);
+    console.log(this.state.currentUser);
+    this.setState({
+      visible: false
+    });
+    const req = {
+        email: this.state.currentUser.email,
+        password: this.state.currentUser.password,
+        title: project.title,
+        type: project.type,
+        requirements: project.requirements,
+    }
+    return projectService
+      .createNewProject(req)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.log(err))
+      .then(() => {
+        this.setState({
+          confirmLoading: false,
+          visible: false,
+        });
+      })
+  }
+
+  handleCancel() {
+    this.setState({
+      visible: false
+    });
+  }
+
   render() {
-    const {initLoading, list, data} = this.state;
+    const {initLoading, list, data, currentUser, visible} = this.state;
+    console.log(list);
     let loadMore;
     if (!initLoading && (list !== data) && (data.length>0)) {
       loadMore =
@@ -75,6 +127,21 @@ export default class ProjectListComponent extends Component {
 
     return (
       <div id="projectListMain">
+        <Row align="top">
+          <Col span={6}>
+            <Title level={4}>{currentUser.firstName}'s list of projects</Title>
+          </Col>
+          <Col span={6} offset={18}>
+            <Button type="primary" onClick={this.showModal}>
+              Create new project
+            </Button>
+            <NewProjectModal
+              visible={visible}
+              handleCreate={this.handleCreate}
+              handleCancel={this.handleCancel}
+            />
+          </Col>
+        </Row>
         <List
           className='demo-loadmore-list'
           loading={initLoading}
@@ -90,7 +157,7 @@ export default class ProjectListComponent extends Component {
             >
               <Skeleton title={false} loading={item.loading} active>
                 <ListItem.Meta
-                  title={item.name}
+                  title={item.title}
                   description="placeholder"
                 />
                 <div>content</div>

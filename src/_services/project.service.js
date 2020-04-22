@@ -3,6 +3,7 @@ import axios from "axios";
 export const projectService = {
   getProjectsByUser,
   searchProject,
+  createNewProject,
 };
 
 //Get project list for a user
@@ -14,6 +15,29 @@ async function getProjectsByUser(req) {
       return res.data;
     })
     .catch((err) => console.log(err));
+}
+
+//Create new project for user
+async function createNewProject(req) {
+  console.log('posting project ', req);
+  return axios
+    .post('/api/project', { params:
+      {
+          email: req.email,
+          password: req.password,
+          title: req.title,
+          type: req.type,
+          requirements: req.requirements
+      }
+    })
+      .then((res) => {
+        if (res.data) {
+          console.log('data');
+        } else {
+          console.log("no data");
+        }
+      })
+      .catch((err) => console.log(err))
 }
 
 //Search project with search text (req.search)
@@ -29,5 +53,5 @@ async function searchProject(req) {
         console.log("no data");
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
 }
