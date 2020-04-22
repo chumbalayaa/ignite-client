@@ -16,8 +16,7 @@ const tabList = [
   {
     key: "Artist Profile",
     tab: "Artist Profile",
-  },
-];
+  }];
 
 const contentList = {
   tab1: <ProjectList />,
@@ -29,16 +28,23 @@ export default class ProfileSecondary extends Component {
     super(props);
 
     this.state = {
-      key: "Projects",
+      key: "Projects"
     };
   }
 
   onTabChange = (key, type) => {
-    console.log(key, type);
     this.setState({ [type]: key });
   };
 
   render() {
+    let secondaryView;
+    if (this.state.key === 'Projects') {
+      secondaryView = <ProjectList />
+    } else if (this.state.key === 'Artist Profile'){
+      secondaryView = <ArtistProfile />
+    } else {
+      secondaryView = <p>Failed to Load</p>
+    }
     return (
       <div id="profileSecondary">
         <Card
@@ -49,7 +55,7 @@ export default class ProfileSecondary extends Component {
             this.onTabChange(key, "key");
           }}
         >
-          {contentList[this.state.key]}
+          {secondaryView}
         </Card>
       </div>
     );
