@@ -10,7 +10,9 @@ export const projectService = {
 async function getProjectsByUser(req) {
   console.log(req);
   return axios
-    .get('/api/myprojects', {params: {email: req.email, password: req.password}})
+    .get("/api/myprojects", {
+      params: { email: req.email, password: req.password },
+    })
     .then((res) => {
       return res.data;
     })
@@ -19,33 +21,33 @@ async function getProjectsByUser(req) {
 
 //Create new project for user
 async function createNewProject(req) {
-  console.log('posting project ', req);
+  console.log("posting project ", req);
   return axios
-    .post('/api/project', { params:
-      {
-          email: req.email,
-          password: req.password,
-          title: req.title,
-          type: req.type,
-          requirements: req.requirements
+    .post("/api/project", {
+      params: {
+        email: req.email,
+        password: req.password,
+        title: req.title,
+        type: req.type,
+        requirements: req.requirements,
+      },
+    })
+    .then((res) => {
+      if (res.data) {
+        console.log("data ", res);
+        return res.data;
+      } else {
+        console.log("no data");
       }
     })
-      .then((res) => {
-        if (res.data) {
-          console.log('data ', res);
-          return res.data;
-        } else {
-          console.log("no data");
-        }
-      })
-      .catch((err) => console.log(err))
+    .catch((err) => console.log(err));
 }
 
 //Search project with search text (req.search)
 async function searchProject(req) {
   console.log(req);
   return axios
-    .get("/api/projectSearch", { params: {text: req.search }})
+    .get("/api/projectSearch", { params: { text: req.search } })
     .then((res) => {
       if (res.data) {
         console.log("we have data");
@@ -54,5 +56,5 @@ async function searchProject(req) {
         console.log("no data");
       }
     })
-    .catch((err) => console.log(err))
+    .catch((err) => console.log(err));
 }

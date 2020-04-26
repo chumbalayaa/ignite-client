@@ -1,5 +1,17 @@
 import React, { Component } from "react";
-import { Layout, Button, Skeleton, List, Row, Col, Typography, Modal, Form, Input, Radio } from "antd";
+import {
+  Layout,
+  Button,
+  Skeleton,
+  List,
+  Row,
+  Col,
+  Typography,
+  Modal,
+  Form,
+  Input,
+  Radio,
+} from "antd";
 import NewProjectModal from "./newproject.component";
 
 import { projectService } from "../_services/project.service";
@@ -38,12 +50,12 @@ export default class ProjectListComponent extends Component {
   componentDidMount() {
     const req = {
       email: this.state.currentUser.email,
-      password: this.state.currentUser.password
+      password: this.state.currentUser.password,
     };
     return projectService
       .getProjectsByUser(req)
       .then((result) => this.populateInitProjects(result))
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
   }
 
   populateInitProjects(result) {
@@ -51,13 +63,13 @@ export default class ProjectListComponent extends Component {
       initLoading: false,
       numLoaded: this.state.numLoaded + 1,
       data: result,
-      list: result.slice(0, count+this.state.numLoaded),
+      list: result.slice(0, count + this.state.numLoaded),
     });
   }
 
   onLoadMore() {
     this.setState({
-      list: this.state.data.slice(0, count*this.state.numLoaded),
+      list: this.state.data.slice(0, count * this.state.numLoaded),
       numLoaded: this.state.numLoaded + 1,
     });
   }
@@ -71,15 +83,15 @@ export default class ProjectListComponent extends Component {
   handleCreate(project) {
     this.setState({
       confirmLoading: true,
-      visible: false
+      visible: false,
     });
     const req = {
-        email: this.state.currentUser.email,
-        password: this.state.currentUser.password,
-        title: project.title,
-        type: project.type,
-        requirements: project.requirements,
-    }
+      email: this.state.currentUser.email,
+      password: this.state.currentUser.password,
+      title: project.title,
+      type: project.type,
+      requirements: project.requirements,
+    };
     console.log("Making new project ", project);
     console.log(this.state);
     return projectService
@@ -87,7 +99,7 @@ export default class ProjectListComponent extends Component {
       .then((result) => {
         console.log("Updating DOM ", result);
         const newData = this.state.data.concat([result]);
-        const newList = newData.slice(0, count*this.state.numLoaded);
+        const newList = newData.slice(0, count * this.state.numLoaded);
         this.setState({
           confirmLoading: false,
           data: newData,
@@ -99,30 +111,31 @@ export default class ProjectListComponent extends Component {
         this.setState({
           confirmLoading: false,
         });
-      })
+      });
   }
 
   handleCancel() {
     this.setState({
-      visible: false
+      visible: false,
     });
   }
 
   render() {
-    const {initLoading, list, data, currentUser, visible} = this.state;
+    const { initLoading, list, data, currentUser, visible } = this.state;
     let loadMore;
-    if (!initLoading && (list.length !== data.length) && (data.length>0)) {
-      loadMore =
+    if (!initLoading && list.length !== data.length && data.length > 0) {
+      loadMore = (
         <div
           style={{
-            textAlign: 'center',
+            textAlign: "center",
             marginTop: 12,
             height: 32,
-            lineHeight: '32px'
+            lineHeight: "32px",
           }}
         >
           <Button onClick={this.onLoadMore}>Load more</Button>
         </div>
+      );
     } else {
       loadMore = null;
     }
@@ -145,28 +158,30 @@ export default class ProjectListComponent extends Component {
           </Col>
         </Row>
         <List
-          className='demo-loadmore-list'
+          className="demo-loadmore-list"
           loading={initLoading}
           itemLayout="horizontal"
           loadMore={loadMore}
           dataSource={list}
-          renderItem={item => (
+          renderItem={(item) => (
             <ListItem
               actions={[
-              <a key="list-loadmore-edit">edit</a>,
-              <a key="list-loadmore-more">more</a>
-            ]}
+                <a key="list-loadmore-edit">edit</a>,
+                <a key="list-loadmore-more">more</a>,
+              ]}
             >
               <Skeleton title={false} loading={item.loading} active>
                 <ListItem.Meta
                   title={item.title}
-                  description={'A ' + item.type + ' requiring '+ item.requirements}
+                  description={
+                    "A " + item.type + " requiring " + item.requirements
+                  }
                 />
               </Skeleton>
             </ListItem>
           )}
         />
       </div>
-    )
+    );
   }
 }

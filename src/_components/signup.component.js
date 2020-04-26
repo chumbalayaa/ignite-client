@@ -96,6 +96,7 @@ export default class Signup extends Component {
           <Button type="primary" htmlType="submit">
             Sign Up
           </Button>
+          Or <a href="/log-in">Log in</a>
         </FormItem>
       </Form>
     );
