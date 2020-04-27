@@ -92,6 +92,7 @@ export default class ArtistProfileComponent extends Component {
     this.onCheckboxChange = this.onCheckboxChange.bind(this);
     this.onEdit = this.onEdit.bind(this);
     this.onSave = this.onSave.bind(this);
+    this.updateArtistDataInView = this.updateArtistDataInView.bind(this);
   }
 
   componentDidMount() {
@@ -114,9 +115,9 @@ export default class ArtistProfileComponent extends Component {
         artistFormVisible: true,
         isArtist: true,
         artistData: {
-          name: user.artist.name,
-          type: user.artist.type,
-          instrument: user.artist.instrument,
+          name: user.artistData.name,
+          type: user.artistData.type,
+          instrument: user.artistData.instrument,
           //videoLinks: user.artist.videoLinks,
         },
       });
@@ -146,9 +147,18 @@ export default class ArtistProfileComponent extends Component {
     });
   }
 
-  onEdit() {}
+  onEdit() {
+    this.setState({
+      showEdit: false,
+      showSave: true,
+      artistFormDisabled: false,
+    });
+  }
 
   onSave() {
+    this.setState({
+      confirmLoading: true,
+    });
     console.log(this.state.artistData);
     const req = {
       email: this.state.currentUser.email,
@@ -159,8 +169,25 @@ export default class ArtistProfileComponent extends Component {
     };
     artistService
       .updateArtist(req)
-      .then((result) => console.log(result))
+      .then((result) => this.updateArtistDataInView(result))
       .catch((err) => console.log(err));
+  }
+
+  updateArtistDataInView(artistData) {
+    this.setState({
+      confirmLoading: false,
+      showEdit: true,
+      showSave: false,
+      artistFormVisible: true,
+      artistFormDisabled: true,
+      isArtist: true,
+      artistData: {
+        name: artistData.name,
+        type: artistData.type,
+        instrument: artistData.instrument,
+        videoLinks: [null],
+      },
+    });
   }
 
   render() {

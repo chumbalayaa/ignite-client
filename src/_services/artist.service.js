@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const artistService = {
   getArtistData,
-  updateArtistData,
+  updateArtist,
   searchArtist,
 };
 
@@ -25,10 +25,10 @@ async function getArtistData(req) {
 }
 
 //Update artist data for user (for profile page)
-async function updateArtistData(req) {
+async function updateArtist(req) {
   console.log(req);
   return axios
-    .get("/api/artistData", {
+    .post("/api/artistData", {
       params: {
         user: { email: req.email, password: req.password },
         artist: {
