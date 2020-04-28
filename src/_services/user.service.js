@@ -15,7 +15,10 @@ async function createNewUser(newUser) {
     .then((res) => {
       if (res.data) {
         console.log("Success");
-        return authenticationService.storeUserAuth(newUser);
+        return authenticationService.storeUserAuth(
+          res.data.token,
+          res.data.user
+        );
       } else {
         console.log("ERROR");
       }
@@ -33,13 +36,10 @@ async function getUser(req) {
       if (res.data) {
         console.log("we have data");
         console.log(res.data);
-        const newUser = {
-          firstName: res.data.firstName,
-          lastName: res.data.lastName,
-          email: res.data.email,
-          password: res.data.password,
-        };
-        return authenticationService.storeUserAuth(newUser);
+        return authenticationService.storeUserAuth(
+          res.data.token,
+          res.data.user
+        );
       } else {
         console.log("no data");
       }
