@@ -3,7 +3,7 @@ import axios from "axios";
 export const artistService = {
   getArtistData,
   updateArtist,
-  searchArtist,
+  artistSearch,
 };
 
 //Get artist data for user (for profile page)
@@ -51,14 +51,14 @@ async function updateArtist(req) {
 }
 
 //Search artist  with search text and type (req.search and req.category)
-async function searchArtist(req) {
+async function artistSearch(req) {
   console.log(req);
   return axios
-    .get("/api/artistSearch", { params: { text: req.search } })
+    .get("/api/artistSearch", { params: { search: req.search } })
     .then((res) => {
       if (res.data) {
         console.log("we have data");
-        console.log(res.data);
+        return res.data;
       } else {
         console.log("no data");
       }

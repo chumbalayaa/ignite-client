@@ -30,15 +30,14 @@ export default class SearchComponent extends Component {
 
   handleSubmit(res) {
     const req = {
-      category: this.category,
       search: res,
     };
-    if (this.category === "Artist") {
+    if (this.state.category === "Artist") {
       return artistService
         .artistSearch(req)
         .then((result) => this.updateResults(result))
         .catch((err) => console.log("heyo", err));
-    } else if (this.category === "Project") {
+    } else if (this.state.category === "Project") {
       return projectService
         .projectSearch(req)
         .then((result) => this.updateResults(result))
@@ -49,7 +48,15 @@ export default class SearchComponent extends Component {
   }
 
   updateResults(res) {
-    console.log(res); //TODO
+    if (res[0]) {
+      this.setState({
+        searchResults: res,
+      });
+    } else {
+      this.setState({
+        searchResults: null,
+      });
+    }
   }
 
   render() {
@@ -64,7 +71,9 @@ export default class SearchComponent extends Component {
             onChange={this.handleToggleChange}
           >
             <Option value="Artist">Artist</Option>
-            <Option value="Project">Project</Option>
+            <Option disabled value="Project">
+              Project (not MVP functionality)
+            </Option>
           </Select>
           <Search
             placeholder="Search Ignite"
