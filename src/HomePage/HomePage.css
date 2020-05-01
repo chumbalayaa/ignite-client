@@ -1,3 +1,7 @@
 #searchMain {
   padding: 25px 0;
 }
+
+#searchResultsTable {
+  margin: 0 20px 0 20px;
+}

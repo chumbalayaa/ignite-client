@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Layout, Input, Select } from "antd";
+import { Layout, Input, Select, Table } from "antd";
 
 import { history } from "../_helpers";
 import { artistService } from "../_services/artist.service";
@@ -8,6 +8,25 @@ import { projectService } from "../_services/project.service";
 const { Search } = Input;
 const { Option } = Select;
 const { Content } = Layout;
+
+const searchColumns = [
+  {
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
+    render: (text) => <a href="#">{text}</a>,
+  },
+  {
+    title: "Type",
+    dataIndex: "type",
+    key: "type",
+  },
+  {
+    title: "Instrument",
+    dataIndex: "instrument",
+    key: "instrument",
+  },
+];
 
 export default class SearchComponent extends Component {
   constructor(props) {
@@ -83,7 +102,13 @@ export default class SearchComponent extends Component {
             onSearch={(value) => this.handleSubmit(value)}
           />
         </Input.Group>
-        {searchResults && <div>hi</div>}
+        {searchResults && (
+          <Table
+            id="searchResultsTable"
+            columns={searchColumns}
+            dataSource={searchResults}
+          />
+        )}
       </Content>
     );
   }
