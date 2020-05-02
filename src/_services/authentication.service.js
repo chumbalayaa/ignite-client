@@ -5,9 +5,7 @@ const currentUserSubject = new BehaviorSubject(
   JSON.parse(localStorage.getItem("currentUser"))
 );
 
-// const currentJWTSubject = new BehaviorSubject(
-//   JSON.parse(localStorage.getItem("JWT"))
-// );
+const currentJWTSubject = new BehaviorSubject(localStorage.getItem("JWT"));
 
 export const authenticationService = {
   storeUserAuth,
@@ -16,12 +14,13 @@ export const authenticationService = {
   get currentUserValue() {
     return currentUserSubject.value;
   },
-  // currentJWT: currentJWTSubject.asObservable(),
-  // get currentJWT() {
-  //   return currentJWTSubject.value;
-  // }
+  currentJWT: currentJWTSubject.asObservable(),
+  get currentJWT() {
+    return currentJWTSubject.value;
+  },
 };
 
+//TODO
 export const validJWT = async () => {
   return await checkJWT();
 };

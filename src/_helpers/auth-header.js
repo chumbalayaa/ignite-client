@@ -3,8 +3,9 @@ import { authenticationService } from "../_services";
 export function authHeader() {
   // return authorization header with jwt token
   const currentUser = authenticationService.currentUserValue;
-  if (currentUser && currentUser.token) {
-    return { Authorization: `Bearer ${currentUser.token}` };
+  const currentToken = authenticationService.currentJWT;
+  if (currentUser && currentToken) {
+    return { Authorization: `Bearer ${currentToken}` };
   } else {
     return {};
   }

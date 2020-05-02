@@ -1,6 +1,6 @@
 import axios from "axios";
 import { authenticationService } from "./authentication.service";
-import { handleResponse } from "../_helpers";
+import { handleResponse, authHeader } from "../_helpers";
 
 export const userService = {
   createNewUser,

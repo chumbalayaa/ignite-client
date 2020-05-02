@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleResponse, authHeader } from "../_helpers";
 
 export const artistService = {
   getArtistData,
@@ -13,6 +14,7 @@ async function getArtistData(req) {
     .get("/api/artistData", {
       params: { email: req.email, password: req.password },
     })
+    .then(handleResponse.handleResponse)
     .then((res) => {
       if (res.data) {
         console.log("have data for ", res.data);
@@ -39,6 +41,7 @@ async function updateArtist(req) {
         },
       },
     })
+    .then(handleResponse.handleResponse)
     .then((res) => {
       if (res.data) {
         console.log("have data for ", res.data);
@@ -55,6 +58,7 @@ async function artistSearch(req) {
   console.log(req);
   return axios
     .get("/api/artistSearch", { params: { search: req.search } })
+    .then(handleResponse.handleResponse)
     .then((res) => {
       if (res.data) {
         console.log("we have data");

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleResponse, authHeader } from "../_helpers";
 
 export const projectService = {
   getProjectsByUser,
@@ -13,6 +14,7 @@ async function getProjectsByUser(req) {
     .get("/api/myprojects", {
       params: { email: req.email, password: req.password },
     })
+    .then(handleResponse.handleResponse)
     .then((res) => {
       return res.data;
     })
@@ -32,6 +34,7 @@ async function createNewProject(req) {
         requirements: req.requirements,
       },
     })
+    .then(handleResponse.handleResponse)
     .then((res) => {
       if (res.data) {
         console.log("data ", res);
@@ -48,6 +51,7 @@ async function searchProject(req) {
   console.log(req);
   return axios
     .get("/api/projectSearch", { params: { text: req.search } })
+    .then(handleResponse.handleResponse)
     .then((res) => {
       if (res.data) {
         console.log("we have data");

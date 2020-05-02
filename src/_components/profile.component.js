@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Typography, Layout, Row, Col, Divider } from "antd";
+import { Typography, Layout, Row, Col, Divider, Button, Input } from "antd";
 import { userService } from "../_services/user.service";
 
 import { authenticationService } from "../_services/";
@@ -13,11 +13,20 @@ export default class Profile extends Component {
 
     this.state = {
       currentUser: authenticationService.currentUserValue,
+      showChangePassword: false,
     };
+
+    this.onChangePassword = this.onChangePassword.bind(this);
+  }
+
+  onChangePassword() {
+    this.setState({
+      showChangePassword: !this.state.showChangePassword,
+    });
   }
 
   render() {
-    const { currentUser } = this.state;
+    const { currentUser, showChangePassword } = this.state;
     return (
       <div id="profileMain">
         <Row>
@@ -47,9 +56,14 @@ export default class Profile extends Component {
           <Col span={4} offset={2}>
             <Title level={4}>Password</Title>
           </Col>
-          <Col span={4} offset={6}>
-            <Title level={4}>{currentUser.password}</Title>
+          <Col span={2} offset={6}>
+            <Button onClick={this.onChangePassword}>Edit Password</Button>
           </Col>
+          {showChangePassword && (
+            <Col span={4} offset={8}>
+              <Input />
+            </Col>
+          )}
         </Row>
       </div>
     );
