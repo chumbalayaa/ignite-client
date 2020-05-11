@@ -13,9 +13,6 @@ const MenuItem = Menu.Item;
 export default class NavigationBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentUser: authenticationService.currentUserValue,
-    };
   }
 
   logout() {
@@ -25,7 +22,7 @@ export default class NavigationBar extends Component {
   }
 
   render() {
-    const { currentUser } = this.state;
+    const { currentUser } = this.props;
     let authenticatedNavbar;
     if (currentUser) {
       authenticatedNavbar = (

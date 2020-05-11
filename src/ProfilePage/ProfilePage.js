@@ -15,18 +15,10 @@ const { Header, Content } = Layout;
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      currentUser: authenticationService.currentUserValue,
-    };
   }
 
   render() {
     return (
-      <Layout>
-        <Header>
-          <NavigationBar {...this.state} />
-        </Header>
         <Content>
           <Row
             id="profile-row-main"
@@ -35,14 +27,13 @@ class ProfilePage extends React.Component {
             align="top"
           >
             <Col id="profile-col" className="gutter-row" span={12}>
-              <Profile />
+              <Profile {...this.props}/>
             </Col>
             <Col id="profile-secondary-col" className="gutter-row" span={12}>
-              <ProfileSecondary />
+              <ProfileSecondary {...this.props}/>
             </Col>
           </Row>
         </Content>
-      </Layout>
     );
   }
 }

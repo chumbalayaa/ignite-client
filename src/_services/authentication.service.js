@@ -15,7 +15,7 @@ export const authenticationService = {
     return currentUserSubject.value;
   },
   currentJWT: currentJWTSubject.asObservable(),
-  get currentJWT() {
+  get currentJWTValue() {
     return currentJWTSubject.value;
   },
 };
@@ -51,6 +51,7 @@ async function storeUserAuth(jwtToken, user) {
   localStorage.setItem("JWT", jwtToken);
   localStorage.setItem("currentUser", JSON.stringify(user));
   currentUserSubject.next(user);
+  currentJWTSubject.next(jwtToken);
   return true;
 }
 
@@ -59,4 +60,5 @@ function logout() {
   localStorage.removeItem("JWT");
   localStorage.removeItem("currentUser");
   currentUserSubject.next(null);
+  currentJWTSubject.next(null);
 }

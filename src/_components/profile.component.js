@@ -26,7 +26,11 @@ export default class Profile extends Component {
   }
 
   render() {
-    const { currentUser, showChangePassword } = this.state;
+    //const { currentUser } = this.props;
+    const {
+      currentUser,
+      showChangePassword,
+    } = this.state;
     return (
       <div id="profileMain">
         <Row>

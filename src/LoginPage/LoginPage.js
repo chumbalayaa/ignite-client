@@ -28,10 +28,6 @@ class LoginPage extends React.Component {
 
   render() {
     return (
-      <Layout>
-        <Header>
-          <NavigationBar {...this.state} />
-        </Header>
         <Layout className="login-inner">
           <Row id="login-row" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col id="explainer-col" className="gutter-row" span={14}>
@@ -46,7 +42,6 @@ class LoginPage extends React.Component {
             </Col>
           </Row>
         </Layout>
-      </Layout>
     );
   }
 }
